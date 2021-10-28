@@ -7,6 +7,10 @@ const mentorSchema  =new Schema({
     },
     dniUp: {
         type: Number,
+        required: [false]
+    },
+    mentoria: {
+        type: [Number],
         required: [true, 'El DNI_UP es necesario para la entidaad Mentor']
     },
     puntaje: {
@@ -18,7 +22,8 @@ const mentorSchema  =new Schema({
 interface IMentor extends Document {
     dni: Number;
     dniUp: Number;
+    mentor: Array<Number>;
     puntaje: Number;
 };
 
-export const Mentor = model<IMentor>('mentor', mentorSchema);
+export const Mentor = model<IMentor>('mentores', mentorSchema);

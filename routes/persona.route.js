@@ -6,16 +6,16 @@ var personaRoutes = (0, express_1.Router)();
 ;
 var getPersonaQuery = function (req) {
     var query = {};
-    if (req.query.nro != null) {
+    if (req.query.dni != null) {
         query.dni = Number(req.query.dni);
     }
-    if (req.query.tipo != null) {
+    if (req.query.nombre != null) {
         query.nombre = String(req.query.nombre);
     }
-    if (req.query.tipo_alt != null) {
+    if (req.query.celular != null) {
         query.celular = Number(req.query.celular);
     }
-    if (req.query.desc != null) {
+    if (req.query.fechanac != null) {
         query.fechanac = String(req.query.fechanac);
     }
     return query;
@@ -33,7 +33,6 @@ personaRoutes.post('', function (req, resp) {
         celular: req.body.celular,
         fechanac: req.body.fechanac
     };
-    console.log(req.query);
     persona_model_1.Persona.create(persona)
         .then(function (personaDB) { return resp.json({ ok: true, mensaje: personaDB }); })
         .catch(function (err) { return resp.json({ ok: false, mensaje: err }); });

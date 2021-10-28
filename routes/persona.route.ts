@@ -14,19 +14,19 @@ interface PersonaQuery {
 let getPersonaQuery = (req: any): PersonaQuery => {
     let query: PersonaQuery = {}; 
     
-    if(req.query.nro != null){
+    if(req.query.dni != null){
         query.dni = Number(req.query.dni);
     }
 
-    if(req.query.tipo != null){
+    if(req.query.nombre != null){
         query.nombre = String(req.query.nombre);
     }
 
-    if(req.query.tipo_alt != null){
+    if(req.query.celular != null){
         query.celular = Number(req.query.celular);
     }
 
-    if(req.query.desc != null){
+    if(req.query.fechanac != null){
         query.fechanac = String(req.query.fechanac);
     }
     return query;
@@ -39,10 +39,7 @@ personaRoutes.get('/' , (req, resp)=>{
     Persona.find(query)
         .then(personaDB => resp.json({ok: true, mensaje: personaDB }) )
         .catch(err => resp.json({ok: false, mensaje: err }));
-
 });
-
-
 
 personaRoutes.post('' , (req, resp)=>{
     
@@ -53,16 +50,10 @@ personaRoutes.post('' , (req, resp)=>{
         fechanac    : req.body.fechanac
     };
 
-    
-
-   
-    console.log(req.query);
-
     Persona.create(persona)
         .then(personaDB => resp.json({ok: true, mensaje: personaDB }) )
         .catch(err => resp.json({ok: false, mensaje: err }));
 
-    
 });
 
 personaRoutes.put('' , (req, resp)=>{
@@ -97,6 +88,5 @@ personaRoutes.delete('' , (req, resp)=>{
     })
     
 });
-
 
 export default personaRoutes;

@@ -9,6 +9,10 @@ var mentorSchema = new mongoose_1.Schema({
     },
     dniUp: {
         type: Number,
+        required: [false]
+    },
+    mentoria: {
+        type: [Number],
         required: [true, 'El DNI_UP es necesario para la entidaad Mentor']
     },
     puntaje: {
@@ -17,4 +21,4 @@ var mentorSchema = new mongoose_1.Schema({
     }
 });
 ;
-exports.Mentor = (0, mongoose_1.model)('mentor', mentorSchema);
+exports.Mentor = (0, mongoose_1.model)('mentores', mentorSchema);
