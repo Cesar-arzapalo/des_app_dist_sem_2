@@ -1,32 +1,25 @@
 import { Router } from  "express";
-import { Mentor } from '../models/mentor.model';
+import { IDatosPersonales, Mentor } from '../models/mentor.model';
 
 const mentorRoutes = Router();
 
 interface MentorQuery {
-        dni?: Number;
-        dniup?: Number;
-        mentoria?: Array<Number>;
-        puntaje?: Number;
+    nivel?: Number;
+    datos_personales?: Array<IDatosPersonales>;
+    tipo_mentor?: String;
+    puntaje?: Number;
+    perfil?: Array<String>;
+    mentorias?: Array<String>;
 };
 
 let getMentorQuery = (req: any): MentorQuery => {
-    let query: MentorQuery = {}; 
-    
-    if(req.query.dni != null){
-        query.dni = Number(req.query.dni);
-    }
-
-    query.dniup = Number(req.query.dniup);
-    
-
-    if(req.query.mentoria != null){
-        query.mentoria = Array<Number>(req.query.mentoria);
-    }
-
-    if(req.query.puntaje != null){
-        query.puntaje = Number(req.query.puntaje);
-    }
+    let query: MentorQuery={}; 
+    query.nivel = Number(req.query.nivel);
+    query.datos_personales = Array<IDatosPersonales>(req.query.datos_personales);
+    query.tipo_mentor =String(req.query.mentoria);
+    query.puntaje = Number(req.query.puntaje);
+    query.perfil  = Array<String>(req.query.perfil);
+    query.mentorias  = Array<String>(req.query.mentorias);
     return query;
 }
 
@@ -42,10 +35,12 @@ mentorRoutes.get('/' , (req, resp)=>{
 mentorRoutes.post('' , (req, resp)=>{
     
     const persona = {
-        dni         : req.body.dni,
-        dniup       : req.body.dniup,
-        mentoria    : req.body.mentoria,
-        puntaje     : req.body.puntaje
+        nivel               : req.body.nivel,
+        datos_personales    : req.body.datos_personales,
+        tipo_mentor         : req.body.tipo_mentor,
+        puntaje             : req.body.puntaje,
+        perfil              : req.body.perfil,
+        mentorias           : req.body.mentorias,
     };
 
     Mentor.create(persona)

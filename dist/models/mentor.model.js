@@ -1,11 +1,13 @@
-import {Schema, model, Document} from 'mongoose';
-
-const DatosPersonalesSchema = new Schema({
-    dni:{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Mentor = exports.MentorSchema = void 0;
+var mongoose_1 = require("mongoose");
+var DatosPersonalesSchema = new mongoose_1.Schema({
+    dni: {
         type: Number,
         required: [true, 'El dni es necesario en la entidad DatosPersonalea']
     },
-    nombre:{
+    nombre: {
         type: String,
         required: [true, 'El nombre es necesario en la entidad DatosPersonalea']
     },
@@ -18,9 +20,7 @@ const DatosPersonalesSchema = new Schema({
         required: [true, 'La Fecha de nacimiento es necesario para la entidaad DatosPersonalea']
     }
 });
-
-
-export const MentorSchema  =new Schema({
+exports.MentorSchema = new mongoose_1.Schema({
     nivel: {
         type: Number,
         required: [true, 'El nivel del mentor es necesario para la entidaad Mentor']
@@ -39,29 +39,13 @@ export const MentorSchema  =new Schema({
     },
     perfil: {
         type: [String],
-        required:[true, "Los perfiles son necesarios para la entidad Mentor"]
+        required: [true, "Los perfiles son necesarios para la entidad Mentor"]
     },
-    mentorias:{
+    mentorias: {
         type: [String],
         required: [true, "El arreglo de referencias de mentorias es necesaria en la entidad Mentor, de no tener Mentorias registradas se considera valido agregar un arregglo vacio"]
     }
 });
-
-
-export interface IDatosPersonales extends Document{
-    dni: Number;
-    nombre: String;
-    celular: Number;
-    fecha_nacimiento: String;
-};
-
-export interface IMentor extends Document {
-    nivel: Number;
-    datos_personales: Array<IDatosPersonales>;
-    tipo_mentor: String;
-    puntaje: Number;
-    perfil: Array<String>;
-    mentorias: Array<String>;
-};
-
-export const Mentor = model<IMentor>('mentores', MentorSchema);
+;
+;
+exports.Mentor = (0, mongoose_1.model)('mentores', exports.MentorSchema);
