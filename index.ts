@@ -5,6 +5,7 @@ import mongoose, {ConnectOptions} from 'mongoose';
 import bodyParser from 'body-parser';
 import personaRoutes from './routes/persona.route';
 import mentorRoutes from './routes/mentor.route';
+import mentoriaRoutes from './routes/mentoria.route';
 
 
 const servidor = new Server(2800);
@@ -15,7 +16,9 @@ servidor.app.use(cors())
 
 //rutas del app
 servidor.app.use('/personas', personaRoutes);
+servidor.app.use('/mentoria', mentoriaRoutes);
 servidor.app.use('/mentores', mentorRoutes);
+
 
 //conectar db
 mongoose.connect('mongodb+srv://admin:12345@cluster0.bcg8b.mongodb.net/distribuidos?retryWrites=true&w=majority',

@@ -9,6 +9,7 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var persona_route_1 = __importDefault(require("./routes/persona.route"));
 var mentor_route_1 = __importDefault(require("./routes/mentor.route"));
+var mentoria_route_1 = __importDefault(require("./routes/mentoria.route"));
 var servidor = new server_1.Server(2800);
 //Body parser
 servidor.app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -16,6 +17,7 @@ servidor.app.use(body_parser_1.default.json());
 servidor.app.use((0, cors_1.default)());
 //rutas del app
 servidor.app.use('/personas', persona_route_1.default);
+servidor.app.use('/mentoria', mentoria_route_1.default);
 servidor.app.use('/mentores', mentor_route_1.default);
 //conectar db
 mongoose_1.default.connect('mongodb+srv://admin:12345@cluster0.bcg8b.mongodb.net/distribuidos?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
