@@ -14,7 +14,7 @@ const DatosPersonalesSchema = new Schema({
         required: [true, 'El celular es necesario para la entidaad DatosPersonalea']
     },
     fecha_nacimiento: {
-        type: String,
+        type: Date,
         required: [true, 'La Fecha de nacimiento es necesario para la entidaad DatosPersonalea']
     }
 });
@@ -52,7 +52,7 @@ export interface IDatosPersonales extends Document{
     dni: Number;
     nombre: String;
     celular: Number;
-    fecha_nacimiento: String;
+    fecha_nacimiento: Date;
 };
 
 export interface IMentor extends Document {
@@ -61,7 +61,7 @@ export interface IMentor extends Document {
     tipo_mentor: String;
     puntaje: Number;
     perfil: Array<String>;
-    mentorias: Array<String>;
+    mentorias?: Array<String>;
 };
 
 export const Mentor = model<IMentor>('mentores', MentorSchema);

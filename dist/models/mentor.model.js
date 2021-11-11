@@ -16,7 +16,7 @@ var DatosPersonalesSchema = new mongoose_1.Schema({
         required: [true, 'El celular es necesario para la entidaad DatosPersonalea']
     },
     fecha_nacimiento: {
-        type: String,
+        type: Date,
         required: [true, 'La Fecha de nacimiento es necesario para la entidaad DatosPersonalea']
     }
 });

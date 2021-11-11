@@ -6,12 +6,24 @@ var mentoriaRoutes = (0, express_1.Router)();
 ;
 var getMentoriaQuery = function (req) {
     var query = {};
-    query.titulo = String(req.query.titulo);
-    query.descripcion = String(req.query.descripcion);
-    query.duracion = Number(req.query.duracion);
-    query.fecha = new Date(req.query.fecha);
-    query.mentor = (req.query.mentor);
-    query.mentorizados = Array(req.query.mentorizados);
+    if (req.query.titulo != null) {
+        query.titulo = String(req.query.titulo);
+    }
+    if (req.query.descripcion != null) {
+        query.descripcion = String(req.query.descripcion);
+    }
+    if (req.query.duracion != null) {
+        query.duracion = Number(req.query.duracion);
+    }
+    if (req.query.fecha != null) {
+        query.fecha = new Date(req.query.fecha);
+    }
+    if (req.query.mentor != null) {
+        query.mentor = (req.query.mentor);
+    }
+    if (req.query.mentorizados != null) {
+        query.mentorizados = Array(req.query.mentorizados);
+    }
     return query;
 };
 mentoriaRoutes.get('/', function (req, resp) {
