@@ -1,98 +1,14 @@
 import { Router } from "express";
-import { IMentor } from '../models/mentor.model';
-import { Mentoria } from '../models/mentoria.model';
+import { MentoriaDeleteController, MentoriaGetController, MentoriaPostController, MentoriaPutController } from "../controller/mentoria.controller";
 
 const mentoriaRoutes = Router();
 
-interface MentoriaQuery {
-    titulo?: String;
-    descripcion?: String;
-    duracion?: Number;
-    fecha?: Date;
-    mentor?: IMentor;
-    mentorizados?: Array<IMentor>;
-};
+mentoriaRoutes.get('/', MentoriaGetController);
 
-let getMentoriaQuery = (req: any): MentoriaQuery => {
-    let query: MentoriaQuery = {};
-    if (req.query.titulo != null) {
-        query.titulo = String(req.query.titulo);
-    }
-    if (req.query.descripcion != null) {
-        query.descripcion = String(req.query.descripcion);
-    }
-    if (req.query.duracion != null) {
-        query.duracion = Number(req.query.duracion);
-    }
-    if (req.query.fecha != null) {
-        query.fecha = new Date(req.query.fecha);
-    }
-    if (req.query.mentor != null) {
-        query.mentor = <IMentor>(req.query.mentor);
-    }
-    if (req.query.mentorizados != null) {
-        query.mentorizados = Array<IMentor>(req.query.mentorizados);
-    }
-    return query;
-}
+mentoriaRoutes.post('', MentoriaPostController);
 
-mentoriaRoutes.get('/', (req, resp) => {
+mentoriaRoutes.put('', MentoriaPutController);
 
-    let query: MentoriaQuery = getMentoriaQuery(req);
-
-    Mentoria.find(query)
-        .then(mentoriaDB => resp.json({ ok: true, mensaje: mentoriaDB }))
-        .catch(err => resp.json({ ok: false, mensaje: err }));
-});
-
-mentoriaRoutes.post('', (req, resp) => {
-
-    const persona = {
-        nivel: req.body.nivel,
-        datos_personales: req.body.datos_personales,
-        tipo_mentor: req.body.tipo_mentor,
-        puntaje: req.body.puntaje,
-        perfil: req.body.perfil,
-        mentorias: req.body.mentorias,
-    };
-
-    Mentoria.create(persona)
-        .then(mentoriaDB => resp.json({ ok: true, mensaje: mentoriaDB }))
-        .catch(err => resp.json({ ok: false, mensaje: err }));
-
-});
-
-mentoriaRoutes.put('', (req, resp) => {
-    let query: MentoriaQuery = getMentoriaQuery(req);
-
-
-    console.log(query);
-
-    console.log(req.query);
-
-    Mentoria.findByIdAndUpdate(req.query.id, query, { new: true }, (err, mentoriaDB) => {
-        if (err) throw err;
-        if (!mentoriaDB) {
-            resp.json({ ok: false, mensaje: "No existe un mentor con ese ID" });
-        } else {
-            resp.json({ ok: true, mensaje: mentoriaDB });
-        }
-
-    })
-
-});
-
-mentoriaRoutes.delete('', (req, resp) => {
-
-    Mentoria.findByIdAndDelete(req.query.id, (err: any, mentoriaDB: any) => {
-        if (err) throw err;
-        if (!mentoriaDB) {
-            resp.json({ ok: false, mensaje: "No existe un mentor con ese ID" });
-        } else {
-            resp.json({ ok: true, mensaje: mentoriaDB });
-        }
-    })
-
-});
+mentoriaRoutes.delete('', MentoriaDeleteController);
 
 export default mentoriaRoutes;
