@@ -1,7 +1,6 @@
-import { Router } from "express";
+import { RequestHandler } from "express";
 import { IDatosPersonales, Mentor } from '../models/mentor.model';
 
-const mentorRoutes = Router();
 
 interface MentorQuery {
     nivel?: Number;
@@ -36,16 +35,16 @@ let getMentorQuery = (req: any): MentorQuery => {
     return query;
 }
 
-mentorRoutes.get('/', (req, resp) => {
+const MentorGetController: RequestHandler  = async (req, resp) => {
 
     let query: MentorQuery = getMentorQuery(req);
     console.log(query)
     Mentor.find(query)
         .then(mentorDB => resp.json({ ok: true, mensaje: mentorDB }))
         .catch(err => resp.json({ ok: false, mensaje: err }));
-});
+};
 
-mentorRoutes.post('', (req, resp) => {
+const MentorPostController: RequestHandler  = async (req, resp) => {
 
     const persona = {
         nivel: req.body.nivel,
@@ -60,9 +59,9 @@ mentorRoutes.post('', (req, resp) => {
         .then(mentorDB => resp.json({ ok: true, mensaje: mentorDB }))
         .catch(err => resp.json({ ok: false, mensaje: err }));
 
-});
+};
 
-mentorRoutes.put('', (req, resp) => {
+const MentorPutController: RequestHandler  = async (req, resp) => {
     let query: MentorQuery = getMentorQuery(req);
 
 
@@ -80,9 +79,9 @@ mentorRoutes.put('', (req, resp) => {
 
     })
 
-});
+};
 
-mentorRoutes.delete('', (req, resp) => {
+const MentorDeleteController: RequestHandler = async (req, resp) => {
 
     Mentor.findByIdAndDelete(req.query.id, (err: any, mentorDB: any) => {
         if (err) throw err;
@@ -93,6 +92,11 @@ mentorRoutes.delete('', (req, resp) => {
         }
     })
 
-});
+};
 
-export default mentorRoutes;
+export {
+	MentorGetController,
+	MentorPostController,
+	MentorPutController,
+	MentorDeleteController,
+};
