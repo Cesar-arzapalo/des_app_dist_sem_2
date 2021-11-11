@@ -3,7 +3,8 @@ import cors  from 'cors';
 
 import mongoose, {ConnectOptions} from 'mongoose';
 import bodyParser from 'body-parser';
-import personaRoutes from './routes/persona.route';
+
+// import personaRoutes from './routes/persona.route';
 import mentorRoutes from './routes/mentor.route';
 import mentoriaRoutes from './routes/mentoria.route';
 
@@ -15,10 +16,9 @@ servidor.app.use(bodyParser.json());
 servidor.app.use(cors())
 
 //rutas del app
-servidor.app.use('/personas', personaRoutes);
+// servidor.app.use('/personas', personaRoutes);
 servidor.app.use('/mentoria', mentoriaRoutes);
 servidor.app.use('/mentores', mentorRoutes);
-
 
 //conectar db
 mongoose.connect('mongodb+srv://admin:12345@cluster0.bcg8b.mongodb.net/distribuidos?retryWrites=true&w=majority',
