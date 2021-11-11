@@ -10,7 +10,8 @@ var body_parser_1 = __importDefault(require("body-parser"));
 var persona_route_1 = __importDefault(require("./routes/persona.route"));
 var mentor_route_1 = __importDefault(require("./routes/mentor.route"));
 var mentoria_route_1 = __importDefault(require("./routes/mentoria.route"));
-var servidor = new server_1.Server(2800);
+var PORT = +process.env.PORT || 2800;
+var servidor = new server_1.Server(PORT);
 //Body parser
 servidor.app.use(body_parser_1.default.urlencoded({ extended: true }));
 servidor.app.use(body_parser_1.default.json());

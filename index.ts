@@ -7,8 +7,8 @@ import personaRoutes from './routes/persona.route';
 import mentorRoutes from './routes/mentor.route';
 import mentoriaRoutes from './routes/mentoria.route';
 
-
-const servidor = new Server(2800);
+const PORT = +process.env.PORT! || 2800;
+const servidor = new Server(PORT);
 //Body parser
 servidor.app.use(bodyParser.urlencoded({extended:true}));
 servidor.app.use(bodyParser.json());
